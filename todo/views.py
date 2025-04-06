@@ -5,8 +5,11 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 from . models import Todo
-from .serializers import TodoSerializer
-from rest_framework import viewsets
+from .serializers import TodoSerializer,UserSerializer
+from rest_framework import viewsets,generics
+from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 #apiregion
 @api_view(['GET'])
@@ -21,3 +24,12 @@ class TodoViewSetApiView(viewsets.ModelViewSet):
     queryset = Todo.objects.order_by('priority').all()
     serializer_class = TodoSerializer
 
+#region user
+
+class UsersGenericApiview(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+
+#endregion

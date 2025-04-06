@@ -11,6 +11,7 @@ urlpatterns =[
 
         path('',views.all_todos),
         path('viewsets/',include(router.urls)),
+        path('users/', views.UsersGenericApiview.as_view()),
 
 
 
